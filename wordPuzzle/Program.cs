@@ -7,6 +7,7 @@ namespace wordPuzzle
 {
     class Program
     {
+        private static readonly Random rng = new Random();
         static void Main(string[] args)
         {
             string[] lines = File.ReadAllLines("ordliste.txt");
@@ -34,7 +35,6 @@ namespace wordPuzzle
         private static string[] ReturnArray(List<string> list)
         {
             string[] returnArray = list.ToArray();
-            Random rng = new Random();
             var superList = new List<string>();
             int target = 200;
             while (target > superList.Count)
@@ -52,12 +52,11 @@ namespace wordPuzzle
         {
             int index = rng.Next(returnArray.Length);
             string randomWord = GetNewRandomWord(returnArray);
-            string substringRandomWord = randomWord.Substring(randomWord.Length - 3).ToLower();
-            if (!IsValidWord(returnArray, substringRandomWord)) GetNewRandomWord(returnArray);
+            string substringRandomWord = randomWord[^3..].ToLower();
             var list = new List<string>();
             foreach (var word in returnArray)
             {
-                string substringAllWords = word.Substring(0, 3);
+                string substringAllWords = word[..3];
                 if (substringRandomWord == substringAllWords)
                 {
                     list.Add(randomWord);
@@ -77,7 +76,6 @@ namespace wordPuzzle
 
         private static string GetNewRandomWord(string[] wordArray)
         {
-            Random rng = new Random();
             int index = rng.Next(wordArray.Length);
             string randomWord = wordArray[index];
             string substringRandomWord = randomWord.Substring(randomWord.Length - 3).ToLower();

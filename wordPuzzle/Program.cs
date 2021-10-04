@@ -79,12 +79,12 @@ namespace wordPuzzle
             int index = rng.Next(wordArray.Length);
             string randomWord = wordArray[index];
             string substringRandomWord = randomWord.Substring(randomWord.Length - 3).ToLower();
-            while (!IsValidWord(wordArray, substringRandomWord))
+            do
             {
                 index = rng.Next(wordArray.Length);
                 randomWord = wordArray[index];
                 substringRandomWord = randomWord.Substring(randomWord.Length - 3).ToLower();
-            }
+            } while (!IsValidWord(wordArray, substringRandomWord));
 
             return randomWord;
         }

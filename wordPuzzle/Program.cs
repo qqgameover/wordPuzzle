@@ -25,11 +25,7 @@ namespace wordPuzzle
 
             var endArray = ReturnArray(list);
             var dist = endArray.Distinct().ToArray();
-            foreach (var s in dist)
-            {
-                Console.WriteLine(s);
-            }
-            Console.WriteLine(dist.Length);
+            foreach (var s in dist) Console.WriteLine(s);
         }
 
         private static string[] ReturnArray(List<string> list)

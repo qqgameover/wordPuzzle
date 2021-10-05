@@ -46,8 +46,8 @@ namespace wordPuzzle
 
             string[] ourList = superList.ToArray();
             return ourList;
-        }
 
+        }
         private static string[] GetRandomWords(Random rng, string[] returnArray)
         {
             int index = rng.Next(returnArray.Length);
@@ -76,14 +76,13 @@ namespace wordPuzzle
 
         private static string GetNewRandomWord(string[] wordArray)
         {
-            int index = rng.Next(wordArray.Length);
-            string randomWord = wordArray[index];
-            string substringRandomWord = randomWord.Substring(randomWord.Length - 3).ToLower();
+            string randomWord;
+            string substringRandomWord;
             do
             {
-                index = rng.Next(wordArray.Length);
+                var index = rng.Next(wordArray.Length);
                 randomWord = wordArray[index];
-                substringRandomWord = randomWord.Substring(randomWord.Length - 3).ToLower();
+                substringRandomWord = randomWord[^3..].ToLower();
             } while (!IsValidWord(wordArray, substringRandomWord));
 
             return randomWord;
